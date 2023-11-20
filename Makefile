@@ -1,0 +1,2 @@
+go:
+	@heroku local

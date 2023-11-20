@@ -13,3 +13,14 @@ class SayHello:
         return await workflow.execute_activity(
             say_hello, name, start_to_close_timeout=timedelta(seconds=5)
         )
+
+
+@workflow.defn
+class HealthCheckin:
+    """A workflow to check if the user followed their commitment
+    to regular healthy activity
+    """
+
+    @workflow.run
+    async def run(self) -> None:
+        """The workflow definition"""
