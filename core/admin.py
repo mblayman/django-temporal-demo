@@ -1,3 +1,13 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Escrow, PoliticalParty
+
+
+@admin.register(Escrow)
+class Escrow(admin.ModelAdmin):
+    pass
+
+
+@admin.register(PoliticalParty)
+class PoliticalParty(admin.ModelAdmin):
+    pass
