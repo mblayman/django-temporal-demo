@@ -7,15 +7,6 @@ with workflow.unsafe.imports_passed_through():
 
 
 @workflow.defn
-class SayHello:
-    @workflow.run
-    async def run(self, name: str) -> str:
-        return await workflow.execute_activity(
-            say_hello, name, start_to_close_timeout=timedelta(seconds=5)
-        )
-
-
-@workflow.defn
 class HealthCheckin:
     """A workflow to check if the user followed their commitment
     to regular healthy activity
@@ -24,3 +15,6 @@ class HealthCheckin:
     @workflow.run
     async def run(self) -> None:
         """The workflow definition"""
+        return await workflow.execute_activity(
+            say_hello, "matt", start_to_close_timeout=timedelta(seconds=5)
+        )

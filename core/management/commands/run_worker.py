@@ -5,7 +5,7 @@ from temporalio.client import Client
 from temporalio.worker import Worker
 
 from core.activities import say_hello
-from core.workflows import SayHello
+from core.workflows import HealthCheckin
 
 
 async def run():
@@ -17,8 +17,8 @@ async def run():
     # Run the worker
     worker = Worker(
         client,
-        task_queue="hello-task-queue",
-        workflows=[SayHello],
+        task_queue="health-checkin-task-queue",
+        workflows=[HealthCheckin],
         activities=[say_hello],
     )
     await worker.run()
