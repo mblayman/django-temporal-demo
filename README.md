@@ -14,7 +14,7 @@ portions of this flow will be synthetic.
 
 ## TODO
 
-* [ ] Remove sayhello workflow stuff.
+* [x] Remove sayhello workflow stuff.
 * [ ] Define workflow and activity.
 * [ ] Wire up worker process with access to necessary workflows and activities.
 
@@ -23,3 +23,10 @@ portions of this flow will be synthetic.
 1. Run the trigger view to pretend to be a scheduled workflow.
 2. Interact with the happy path so that nothing is added to the escrow.
 3. Show the failure path to show that the escrow is incremented.
+
+
+## The Workflow
+
+1. Send the rich notification.
+2. Wait for a signal.
+3. Update escrow.

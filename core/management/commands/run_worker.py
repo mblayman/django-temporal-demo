@@ -4,7 +4,7 @@ from django.core.management.base import BaseCommand
 from temporalio.client import Client
 from temporalio.worker import Worker
 
-from core.activities import say_hello
+from core.activities import send_notification
 from core.workflows import HealthCheckin
 
 
@@ -19,7 +19,7 @@ async def run():
         client,
         task_queue="health-checkin-task-queue",
         workflows=[HealthCheckin],
-        activities=[say_hello],
+        activities=[send_notification],
     )
     await worker.run()
 

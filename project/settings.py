@@ -55,7 +55,7 @@ ROOT_URLCONF = "project.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -67,6 +67,13 @@ TEMPLATES = [
         },
     },
 ]
+if DEBUG:
+    # app_dirs isn't allowed to be True when the loaders key is present.
+    TEMPLATES[0]["APP_DIRS"] = False
+    TEMPLATES[0]["OPTIONS"]["loaders"] = [
+        "django.template.loaders.filesystem.Loader",
+        "django.template.loaders.app_directories.Loader",
+    ]
 
 WSGI_APPLICATION = "project.wsgi.application"
 

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>Answer</h1>
+    <form method="POST" action="{% url 'answer' %}">
+      {% csrf_token %}
+
+      <p>Workflow ID</p>
+      <input type="text" name="workflow_id">
+
+      <p>Answer (use "yes" or "no")</p>
+      <input type="text" name="reply">
+      <br>
+      <br>
+
+      <button type="button" onclick="onClickAnswer(this)">Submit</button>
+    </form>
+    <script>
+      function onClickAnswer(button) {
+        var formData = new FormData(button.form);
+        var obj = {};
+        formData.forEach(function(value, key){
+            obj[key] = value;
+        });
+        var json = JSON.stringify(obj);
+        console.log(json);
+
+        const rawResponse = fetch('{% url 'answer' %}', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-CSRFToken': obj['csrfmiddlewaretoken']
+          },
+          body: json,
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,7 +1,12 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 from temporalio.client import Client
 
 from core.workflows import HealthCheckin
+
+
+def index(request):
+    return render(request, "index.html", {})
 
 
 async def trigger(request):
@@ -20,3 +25,11 @@ async def trigger(request):
     )
 
     return HttpResponse(b"ok")
+
+
+async def answer(request):
+    workflow_id = "123"
+    client = await Client.connect("localhost:7233")
+    handle = client.get_workflow_handle(workflow_id)
+    print(handle)
+    return HttpResponse(b"{}")

@@ -1,3 +1,4 @@
 Django
+httpx
 temporalio
 uvicorn[standard]
