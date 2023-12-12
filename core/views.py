@@ -1,3 +1,6 @@
+import json
+import uuid
+
 from django.http import HttpResponse
 from django.shortcuts import render
 from temporalio.client import Client
@@ -18,18 +21,20 @@ async def trigger(request):
     """
     client = await Client.connect("localhost:7233")
 
+    workflow_id = f"health-checkin-{uuid.uuid4()}"
     await client.start_workflow(
         HealthCheckin.run,
-        id="health-checkin-workflow",
+        id=workflow_id,
         task_queue="health-checkin-task-queue",
     )
 
-    return HttpResponse(b"ok")
+    return HttpResponse(workflow_id.encode())
 
 
 async def answer(request):
-    workflow_id = "123"
+    data = json.loads(request.body.decode())
+    workflow_id = data["workflow_id"]
     client = await Client.connect("localhost:7233")
     handle = client.get_workflow_handle(workflow_id)
-    print(handle)
+    await handle.signal(HealthCheckin.send_answer, data["reply"])
     return HttpResponse(b"{}")

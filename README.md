@@ -15,8 +15,10 @@ portions of this flow will be synthetic.
 ## TODO
 
 * [x] Remove sayhello workflow stuff.
-* [ ] Define workflow and activity.
-* [ ] Wire up worker process with access to necessary workflows and activities.
+* [x] Define workflow and activity.
+* [x] Wire up worker process with access to necessary workflows and activities.
+* [x] Create unique workflow ID per execution
+* [ ] Use http action for ntfy.sh
 
 ## Plan
 
@@ -30,3 +32,4 @@ portions of this flow will be synthetic.
 1. Send the rich notification.
 2. Wait for a signal.
 3. Update escrow.
+4. On failure, notify escrow amount.
