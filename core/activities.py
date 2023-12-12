@@ -1,6 +1,7 @@
 import json
 
 import httpx
+from django.conf import settings
 from temporalio import activity
 
 from .models import Escrow
@@ -8,9 +9,12 @@ from .models import Escrow
 
 @activity.defn
 async def send_notification() -> None:
-    return None
-    # TODO: Call ntfy.sh and send along the workflow execution ID.
-    # In a real app, this would send a notification to a specific user.
+    """Send notification to user.
+
+    In a real app, this would send a notification to a specific user.
+    """
+    workflow_id = activity.info().workflow_id
+
     async with httpx.AsyncClient() as client:
         await client.post(
             "https://ntfy.sh/",
@@ -22,10 +26,21 @@ async def send_notification() -> None:
                     {
                         "action": "http",
                         "label": "Yep",
-                        "url": "https://www.mattlayman.com/",
+                        # In a real app, this would be the actual response URL.
+                        "url": settings.NGROK_URL + "answer/",
                         "method": "POST",
-                        "body": json.dumps({"execution-id": "123"}),
-                    }
+                        "body": json.dumps(
+                            {"reply": "yes", "workflow_id": workflow_id}
+                        ),
+                    },
+                    {
+                        "action": "http",
+                        "label": "Nah",
+                        # In a real app, this would be the actual response URL.
+                        "url": settings.NGROK_URL + "answer/",
+                        "method": "POST",
+                        "body": json.dumps({"reply": "no", "workflow_id": workflow_id}),
+                    },
                 ],
             },
         )
