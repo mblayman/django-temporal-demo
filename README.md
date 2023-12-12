@@ -11,21 +11,14 @@ portions of this flow will be synthetic.
 
 * There is only a single user to support. This avoids auth and work around
   selecting the right user.
-
-## TODO
-
-* [x] Remove sayhello workflow stuff.
-* [x] Define workflow and activity.
-* [x] Wire up worker process with access to necessary workflows and activities.
-* [x] Create unique workflow ID per execution
-* [ ] Use http action for ntfy.sh
+* This code is not going to production. Please, do NOT blindly copy/paste
+  without thinking about what your code needs to do.
 
 ## Plan
 
 1. Run the trigger view to pretend to be a scheduled workflow.
 2. Interact with the happy path so that nothing is added to the escrow.
 3. Show the failure path to show that the escrow is incremented.
-
 
 ## The Workflow
 
