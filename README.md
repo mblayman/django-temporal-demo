@@ -13,6 +13,9 @@ portions of this flow will be synthetic.
   selecting the right user.
 * This code is not going to production. Please, do NOT blindly copy/paste
   without thinking about what your code needs to do.
+* Assuming use of NGROK_URL so the demo will not run without setting a value
+  in a `.env` file. The value could be anything, but the notifications won't work
+  without a publicly resolvable URL.
 
 ## Plan
 
