@@ -29,3 +29,11 @@ portions of this flow will be synthetic.
 2. Wait for a signal.
 3. Update escrow.
 4. On failure, notify escrow amount.
+
+## Files of Interest
+
+* `Procfile`
+* `workflows.py`
+* `activities.py`
+* `views.py`
+* `run_worker.py`
